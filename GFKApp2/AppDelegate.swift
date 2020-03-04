@@ -7,14 +7,19 @@
 //
 
 import UIKit
+import Parse
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        let parseConfig = ParseClientConfiguration {
+            $0.applicationId = "d913fe13675cf6fa17144817b4293fed8d6ab99b"
+            $0.clientKey = "b8dbce8f6c53b140348bc922815ab5a4927a3683"
+            $0.server = "http://54.198.51.241:80/parse"
+        }
+        Parse.initialize(with: parseConfig)
         return true
     }
 

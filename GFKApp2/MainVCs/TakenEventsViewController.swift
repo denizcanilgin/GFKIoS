@@ -12,6 +12,7 @@ import Parse
 class TakenEventsViewController:UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var listTakenActivities = [PFObject]()
+    var listApprovedActivities = [PFObject]()
     var tableView:UITableView? = nil
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -24,6 +25,12 @@ class TakenEventsViewController:UIViewController, UITableViewDataSource, UITable
         
         cellView.LabelPoint.text = String(point!)
         cellView.LabelTitle.text = title!
+        
+        cellView.LabelStatus.text = "Kayıt olundu"
+        cellView.LabelStatus.textColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+        
+    
+        
         
                return cellView
     }
@@ -41,6 +48,7 @@ class TakenEventsViewController:UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         retrieveTakenEvents()
+
 
         // Do any additional setup after loading the view.
     }
@@ -67,7 +75,8 @@ class TakenEventsViewController:UIViewController, UITableViewDataSource, UITable
                 for Activity in objects {
                     print(Activity.objectId as Any)
                     
-                    let listTakers =  Activity["ListTakers"] as? Array<PFUser>
+                    let listTakers = Activity["ListTakers"] as? Array<PFUser>
+//                    let listApprovedTakers = Activity["ApprovedListTakers"] as? Array<PFUser>
                 
                     if (listTakers != nil) {
                     
@@ -91,6 +100,8 @@ class TakenEventsViewController:UIViewController, UITableViewDataSource, UITable
         }
         
     }
+    
+
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         

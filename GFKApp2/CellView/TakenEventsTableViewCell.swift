@@ -12,6 +12,8 @@ class TakenEventsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var LabelTitle: UILabel!
     @IBOutlet weak var LabelPoint: UILabel!
+    @IBOutlet weak var ImageViewtatus: UIImageView!
+    @IBOutlet weak var LabelStatus: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

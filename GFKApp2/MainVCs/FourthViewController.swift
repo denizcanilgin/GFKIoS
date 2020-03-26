@@ -15,8 +15,11 @@ var postIndex = 0
 var listPostsGlobal = [PFObject]()
 var listImageGlobal = [UIImage]()
 
+var userProfileImageView:UIImage = #imageLiteral(resourceName: "ppdefault")
+
 class FourthViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var PPImageView: UIImageView!
     var tableView:UITableView!
  
            var listPosts = [PFObject]()
@@ -71,9 +74,51 @@ class FourthViewController: UIViewController, UITableViewDataSource, UITableView
            super.viewDidLoad()
            // Do any additional setup after loading the view.
           // retrieveActivities()
+        
+        
+
         retrievePosts()
-           
+        retrieveUser()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.imageTapped(gesture:)))
+
+               // add it to the image view;
+               PPImageView.addGestureRecognizer(tapGesture)
+               // make sure imageView can be interacted with by user
+               PPImageView.isUserInteractionEnabled = true
+
        }
+    
+    
+    @objc func imageTapped(gesture: UIGestureRecognizer) {
+            // if the tapped view is a UIImageView then set it to imageview
+            if (gesture.view as? UIImageView) != nil {
+                print("Image Tapped")
+                //Here you can initiate your new ViewController
+                 showUserActionMenu(title: "Çıkış Yap",message: "Çıkış yapmak istediğinizden emin misiniz?")
+
+          }}
+    
+    func showUserActionMenu(title:String,message:String){
+         
+          let alert = UIAlertController(title: "" + title, message: "" + message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Çıkış Yap", style: .default, handler: { action in
+                 
+                 PFUser.logOut()
+                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                   let controller = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+                                   controller.modalPresentationStyle = .fullScreen
+                                   self.present(controller, animated: true, completion: nil)
+                 
+                  
+                }))
+                alert.addAction(UIAlertAction(title: "Vazgeç", style: .default, handler: nil))
+                self.present(alert, animated: true)
+         
+     }
+     
+    
+ 
     
  
        
@@ -98,7 +143,7 @@ class FourthViewController: UIViewController, UITableViewDataSource, UITableView
                        self.listPosts.append(object)
                
                     self.tableView.reloadData()
-                       
+                    
                    }
                    
                 
@@ -120,6 +165,47 @@ class FourthViewController: UIViewController, UITableViewDataSource, UITableView
         performSegue(withIdentifier: "postSegue", sender: self)
         
     }
+    
+    func retrieveUser(){
+               
+               let userId = PFUser.current()?.objectId
+        
+        if(userId != nil){
+        
+               let query = PFUser.query()
+               query?.getObjectInBackground(withId: userId!){(user,error) in
+       
+                   if(error == nil){
+       
+                      
+                       let photo = ((user?["Photo"] as? PFFileObject))
+                     
+                       photo?.getDataInBackground(block: { (data, error) in
+                           
+                           if(error == nil){
+                               
+                               let image = UIImage(data: data!)
+                               if(image != nil){
+                                
+                                self.PPImageView.image = image
+                                userProfileImageView = image!
+                                self.PPImageView.setRounded()
+                                                      
+                                                   
+                                                  }
+                           }
+                           
+                       })
+                    
+       
+                   }
+       
+               }
+       
+           
+        }
+               
+           }
 
        
        
@@ -131,42 +217,38 @@ class FourthViewController: UIViewController, UITableViewDataSource, UITableView
            self.present(alert, animated: true)
            
        }
-
-    
-}
-
-extension UIImageView {
-    func load(url: URL) {
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.image = image
-                    }
-                }
-            }
-        }
-    }
     
     
     func loadImage(imageView:UIImageView,urlkey:String){
-        
-  
-        if let url = URL(string: urlkey){
-            
-            do {
-                let data = try Data(contentsOf: url)
-               imageView.image = UIImage(data: data)
-                
-            }catch let err {
-                print(" Error : \(err.localizedDescription)")
-            }
-            
-            
-        }
-        
-    }
+          
+    
+           AF.request(urlkey).responseImage { response in
+                          debugPrint(response)
+
+                          debugPrint(response.result)
+
+                          if case .success(let image) = response.result {
+                              print("image downloaded: \(image)")
+                            
+                              imageView.image = image
+                              
+                          }
+                      }
+      
+          
+      }
+    
+    
+    
+
     
 }
+
+    
+    
+    
+    
+    
+
 
 

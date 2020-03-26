@@ -32,11 +32,9 @@ class SurveyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
-    
-   
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.tableView = tableView
+        self.tableView.isEditing = true
         return listActivities.count
     }
     
@@ -79,27 +77,40 @@ class SurveyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cellView
     }
     
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let movedObject = self.listActivities[sourceIndexPath.row]
+        listActivities.remove(at: sourceIndexPath.row)
+        listActivities.insert(movedObject, at: destinationIndexPath.row)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        retrieveEdu()
+       self.retrieveEdu()
+     
     }
+    
     
     func saveResults(){
         var i = 0
         var selectedActs = [String]()
         
-        for state in check {
-            
-            if(state == true){
+        for activity in listActivities {
             
                 let currentAct = listActivities[i]
                 let titleAct = currentAct["Title"] as? String
                 selectedActs.append(titleAct!)
                 print("selected: \(selectedActs.count)")
                 
-            }
+            
             
             i = i+1
             
@@ -124,8 +135,6 @@ class SurveyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
-
-   
     func retrieveEdu(){
         
         let eduTitle = PFObject(className:"Activity")
@@ -237,6 +246,8 @@ class SurveyViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
                 
             }
+    
+ 
 
 
 }

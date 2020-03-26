@@ -14,6 +14,7 @@ var listTasksGlobalIndex = 0
 
 class FirstViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
 
+    @IBOutlet weak var PPImageView: UIImageView!
     
     var tableView:UITableView!
     var listTasks = [PFObject]()
@@ -26,17 +27,18 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
        {
         self.tableView = tableView
-        return (listTasks.count)
+        return (self.listTasks.count)
        }
     
        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
        {
+        
     
         
         let cellView = tableView.dequeueReusableCell(withIdentifier: "table_cell_task",for: indexPath) as! TasksTableViewCell
         
-        if(indexPath.row  <= listTasks.count){
-            let object = listTasks[indexPath.row];
+        if(indexPath.row  <= self.listTasks.count){
+            let object = self.listTasks[indexPath.row];
             let title = object["Title"] as? String
             let point = object["Point"] as? Int
             
@@ -64,9 +66,28 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        retrieveActivities()
+//        self.retrieveActivities()
+        
+             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.imageTapped(gesture:)))
+
+                         // add it to the image view;
+                         PPImageView.addGestureRecognizer(tapGesture)
+                         // make sure imageView can be interacted with by user
+                         PPImageView.isUserInteractionEnabled = true
+     
         
     }
+    
+    
+    @objc func imageTapped(gesture: UIGestureRecognizer) {
+            // if the tapped view is a UIImageView then set it to imageview
+            if (gesture.view as? UIImageView) != nil {
+                print("Image Tapped")
+                
+                showUserActionMenu(title: "Çıkış Yap",message: "Çıkış yapmak istediğinizden emin misiniz?")
+                //Here you can initiate your new ViewController
+
+          }}
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
@@ -75,9 +96,13 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
     func retrieveActivities(){
         
         self.listTasks.removeAll()
-
-        
+        listTasksGlobal.removeAll()
+       
+    
         let query = PFQuery(className:"Activity")
+//        query.whereKey("Type", equalTo: 1)
+        query.whereKey("Type", notEqualTo: 5)
+//        query.whereKey("Point", equalTo:75)
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             if let error = error {
                 // Log details of the failure
@@ -94,8 +119,7 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
                     
                 }
                 
-                    
-                    self.tableView.reloadData()
+                self.tableView.reloadData()
                 
                 
             }
@@ -109,8 +133,10 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
           
 
-            let pfTask = listTasks[indexPath.row]
-        
+
+        if(self.listTasks.count > indexPath.row){
+            let pfTask = self.listTasks[indexPath.row]
+       
              let maxNumberOfTakers = pfTask["MaxNumberOfTakers"] as! Int
              let listTakers = pfTask["NumberOfTakers"] as? Array<PFUser>
              
@@ -122,7 +148,9 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
         if(numberOfTakers < maxNumberOfTakers)
         {
             
-            checkUserIsAlreadyRegistered(pfTask: listTasks[indexPath.row], indexPath: indexPath.row)
+            
+            print("Tıklandı!")
+            checkUserIsAlreadyRegistered(pfTask: self.listTasks[indexPath.row], indexPath: indexPath.row)
 
               
         }else{
@@ -133,7 +161,7 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
             
         
             
-          
+        }
       }
     
     
@@ -146,13 +174,33 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     
+    func showUserActionMenu(title:String,message:String){
+        
+         let alert = UIAlertController(title: "" + title, message: "" + message, preferredStyle: .alert)
+               alert.addAction(UIAlertAction(title: "Çıkış Yap", style: .default, handler: { action in
+                
+                PFUser.logOut()
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                  let controller = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+                                  controller.modalPresentationStyle = .fullScreen
+                                  self.present(controller, animated: true, completion: nil)
+                
+                 
+               }))
+               alert.addAction(UIAlertAction(title: "Vazgeç", style: .default, handler: nil))
+               self.present(alert, animated: true)
+        
+    }
+    
+    
+    
     func incrementRegisteredNumberOfAtendeesByOne(indexPath:Int){
         
             let pfTask = self.listTasks[indexPath]
-            var numberOfAtendees = pfTask["NumberOfTakers"] as! Int
-            numberOfAtendees += 1
-            print("NumberOfAtendees:"  + String(numberOfAtendees))
-            pfTask["NumberOfTakers"] = numberOfAtendees
+//            var numberOfAtendees = pfTask["NumberOfTakers"] as! Int
+//            numberOfAtendees += 1
+//            print("NumberOfAtendees:"  + String!(numberOfAtendees))
+//            pfTask["NumberOfTakers"] = numberOfAtendees
             
            
         if(pfTask["ListTakers"]  == nil){
@@ -227,6 +275,10 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func viewDidAppear(_ animated: Bool) {
                retrieveActivities()
+        
+        PPImageView.image = userProfileImageView
+        PPImageView.setRounded()
+        
            }
 
     

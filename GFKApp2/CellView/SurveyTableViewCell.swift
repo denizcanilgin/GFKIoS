@@ -12,8 +12,11 @@ protocol CheckButtonsDelegate{
     func checkBoxTappedd(at index:IndexPath)
 }
 
+var i = 0
+
 class SurveyTableViewCell: UITableViewCell {
 
+    
     var delegate:CheckButtonsDelegate!
     
        var indexPath:IndexPath!
@@ -27,7 +30,6 @@ class SurveyTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     
-        
     }
 
     @IBOutlet weak var SurveyCellTitle: UILabel!
@@ -57,12 +59,22 @@ class SurveyTableViewCell: UITableViewCell {
         if sender.isSelected {
             checked = false
 //             print(checked)
+           i = i - 1
+            
                } else {
     
             checked = true
+            i = i + 1
 //             print(checked)
                }
-    
+        
+        
+        
+        if(i < 5){
+        var imageName = "number" + String(i)
+        var image:UIImage = UIImage(named:imageName)!
+        SurveyCellButton.setImage(image, for: UIControl.State.selected)
+        }
     }
     
 }

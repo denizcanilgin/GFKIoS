@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6A393A0CB73AD9E963BAF613 /* Pods_GFKApp2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF0EF55A8F12A25E03537E3A /* Pods_GFKApp2.framework */; };
+		2D41D9E884A940D56D5D4A7D /* Pods_GFKApp2_GFKApp2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB941E4124182DBA003BB546 /* Pods_GFKApp2_GFKApp2UITests.framework */; };
+		38B9AAF60FE2FACA2167703F /* Pods_GFKApp2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB941E4224182DBA003BB546 /* Pods_GFKApp2Tests.framework */; };
 		93A53E51666FCEE16116E772 /* Pods_GFKApp2_GFKApp2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD49044EE6EB12D4684A9B7F /* Pods_GFKApp2_GFKApp2UITests.framework */; };
 		96BC50279E6E24E27CE94B46 /* Pods_GFKApp2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23E666264D8C9F4696A46706 /* Pods_GFKApp2Tests.framework */; };
 		EB2FFAEA240C8D870064BC6F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2FFAE9240C8D870064BC6F /* ProfileViewController.swift */; };
@@ -27,6 +28,11 @@
 		EB71FDDE240DED750071A450 /* SurveyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71FDDD240DED750071A450 /* SurveyTableViewCell.swift */; };
 		EB71FDDF240DEE260071A450 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE9BC43240DA8D30077BC20 /* RegisterViewController.swift */; };
 		EB71FDE0240DEE260071A450 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE9BC42240DA8D30077BC20 /* LoginViewController.swift */; };
+		EB78576C2422FC5100DC3929 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB78576B2422FC5100DC3929 /* MainTabBarViewController.swift */; };
+		EB941E3924180F53003BB546 /* CustomEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB941E3824180F53003BB546 /* CustomEventViewController.swift */; };
+		EB941E3B24181123003BB546 /* CustomEventViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB941E3A24181123003BB546 /* CustomEventViewCell.swift */; };
+		EB941E812418A7B0003BB546 /* SuccessfullyRegistered2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB941E802418A7B0003BB546 /* SuccessfullyRegistered2ViewController.swift */; };
+		EB966FD6241D9FBF00BD5F60 /* Pods_GFKApp2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF0EF55A8F12A25E03537E3A /* Pods_GFKApp2.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		EBE9BC3E240DA7C00077BC20 /* TasksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE9BC3D240DA75F0077BC20 /* TasksTableViewCell.swift */; };
 		EBE9BC45240DA90B0077BC20 /* TakenEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE9BC44240DA90B0077BC20 /* TakenEventsViewController.swift */; };
 		EBE9BC4B240DAFD10077BC20 /* TakenEventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE9BC4A240DAFD10077BC20 /* TakenEventsTableViewCell.swift */; };
@@ -48,6 +54,19 @@
 			remoteInfo = GFKApp2;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EB966FD8241D9FBF00BD5F60 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		17662FF44AD48F23930EC293 /* Pods-GFKApp2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GFKApp2Tests.debug.xcconfig"; path = "Target Support Files/Pods-GFKApp2Tests/Pods-GFKApp2Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -78,6 +97,30 @@
 		EB6953182409DA8000108666 /* FourthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourthViewController.swift; sourceTree = "<group>"; };
 		EB71FDDB240DED210071A450 /* SurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyViewController.swift; sourceTree = "<group>"; };
 		EB71FDDD240DED750071A450 /* SurveyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyTableViewCell.swift; sourceTree = "<group>"; };
+		EB78576B2422FC5100DC3929 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		EB941E3824180F53003BB546 /* CustomEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEventViewController.swift; sourceTree = "<group>"; };
+		EB941E3A24181123003BB546 /* CustomEventViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEventViewCell.swift; sourceTree = "<group>"; };
+		EB941E3C24182DBA003BB546 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E3D24182DBA003BB546 /* AlamofireImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlamofireImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E3E24182DBA003BB546 /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E3F24182DBA003BB546 /* Parse.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = Parse.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E4024182DBA003BB546 /* Parse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Parse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E4124182DBA003BB546 /* Pods_GFKApp2_GFKApp2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_GFKApp2_GFKApp2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E4224182DBA003BB546 /* Pods_GFKApp2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_GFKApp2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E5424182EE7003BB546 /* Parse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Parse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E58241830D3003BB546 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E59241830D3003BB546 /* AlamofireImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlamofireImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E5A241830D3003BB546 /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E5B241830D3003BB546 /* Parse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Parse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E6524183B5C003BB546 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E6724183B5C003BB546 /* AlamofireImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlamofireImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E6924183B5C003BB546 /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E6B24183B5C003BB546 /* Parse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Parse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E6D24183F6D003BB546 /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E7124183F7A003BB546 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E7424183F7F003BB546 /* AlamofireImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlamofireImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E7724183F8A003BB546 /* Parse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Parse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB941E802418A7B0003BB546 /* SuccessfullyRegistered2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfullyRegistered2ViewController.swift; sourceTree = "<group>"; };
 		EBE9BC3D240DA75F0077BC20 /* TasksTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewCell.swift; sourceTree = "<group>"; };
 		EBE9BC42240DA8D30077BC20 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = AuthVCs/LoginViewController.swift; sourceTree = "<group>"; };
 		EBE9BC43240DA8D30077BC20 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = AuthVCs/RegisterViewController.swift; sourceTree = "<group>"; };
@@ -92,7 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A393A0CB73AD9E963BAF613 /* Pods_GFKApp2.framework in Frameworks */,
+				EB966FD6241D9FBF00BD5F60 /* Pods_GFKApp2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96BC50279E6E24E27CE94B46 /* Pods_GFKApp2Tests.framework in Frameworks */,
+				38B9AAF60FE2FACA2167703F /* Pods_GFKApp2Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93A53E51666FCEE16116E772 /* Pods_GFKApp2_GFKApp2UITests.framework in Frameworks */,
+				2D41D9E884A940D56D5D4A7D /* Pods_GFKApp2_GFKApp2UITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +211,7 @@
 				EB4CD76324076E38000F4931 /* Info.plist */,
 				EB612F7B240B471E00CA9CE5 /* PostViewController.swift */,
 				EB2FFAED240CA87D0064BC6F /* SucessfullyRegisteredViewController.swift */,
+				EB941E802418A7B0003BB546 /* SuccessfullyRegistered2ViewController.swift */,
 			);
 			path = GFKApp2;
 			sourceTree = "<group>";
@@ -195,6 +241,7 @@
 				EBE9BC3D240DA75F0077BC20 /* TasksTableViewCell.swift */,
 				EB6953162409D94C00108666 /* BlogTableViewCell.swift */,
 				EBE9BC4A240DAFD10077BC20 /* TakenEventsTableViewCell.swift */,
+				EB941E3A24181123003BB546 /* CustomEventViewCell.swift */,
 			);
 			path = CellView;
 			sourceTree = "<group>";
@@ -207,6 +254,8 @@
 				EB6953182409DA8000108666 /* FourthViewController.swift */,
 				EB2FFAE9240C8D870064BC6F /* ProfileViewController.swift */,
 				EBE9BC44240DA90B0077BC20 /* TakenEventsViewController.swift */,
+				EB941E3824180F53003BB546 /* CustomEventViewController.swift */,
+				EB78576B2422FC5100DC3929 /* MainTabBarViewController.swift */,
 			);
 			path = MainVCs;
 			sourceTree = "<group>";
@@ -221,6 +270,26 @@
 		EC87B87E6A3AB25FAB8860E8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EB941E7724183F8A003BB546 /* Parse.framework */,
+				EB941E7424183F7F003BB546 /* AlamofireImage.framework */,
+				EB941E7124183F7A003BB546 /* Alamofire.framework */,
+				EB941E6D24183F6D003BB546 /* Bolts.framework */,
+				EB941E6524183B5C003BB546 /* Alamofire.framework */,
+				EB941E6724183B5C003BB546 /* AlamofireImage.framework */,
+				EB941E6924183B5C003BB546 /* Bolts.framework */,
+				EB941E6B24183B5C003BB546 /* Parse.framework */,
+				EB941E58241830D3003BB546 /* Alamofire.framework */,
+				EB941E59241830D3003BB546 /* AlamofireImage.framework */,
+				EB941E5A241830D3003BB546 /* Bolts.framework */,
+				EB941E5B241830D3003BB546 /* Parse.framework */,
+				EB941E5424182EE7003BB546 /* Parse.framework */,
+				EB941E3C24182DBA003BB546 /* Alamofire.framework */,
+				EB941E3D24182DBA003BB546 /* AlamofireImage.framework */,
+				EB941E3E24182DBA003BB546 /* Bolts.framework */,
+				EB941E3F24182DBA003BB546 /* Parse.bundle */,
+				EB941E4024182DBA003BB546 /* Parse.framework */,
+				EB941E4124182DBA003BB546 /* Pods_GFKApp2_GFKApp2UITests.framework */,
+				EB941E4224182DBA003BB546 /* Pods_GFKApp2Tests.framework */,
 				AF0EF55A8F12A25E03537E3A /* Pods_GFKApp2.framework */,
 				FD49044EE6EB12D4684A9B7F /* Pods_GFKApp2_GFKApp2UITests.framework */,
 				23E666264D8C9F4696A46706 /* Pods_GFKApp2Tests.framework */,
@@ -240,6 +309,7 @@
 				EB4CD74D24076E37000F4931 /* Frameworks */,
 				EB4CD74E24076E37000F4931 /* Resources */,
 				F2C8D4D956E2A843917FCC4B /* [CP] Embed Pods Frameworks */,
+				EB966FD8241D9FBF00BD5F60 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -424,7 +494,7 @@
 		};
 		D2C52424AFC809A1E5877DBC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -446,7 +516,7 @@
 		};
 		F2C8D4D956E2A843917FCC4B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -491,14 +561,18 @@
 				EB71FDE0240DEE260071A450 /* LoginViewController.swift in Sources */,
 				EB71FDDE240DED750071A450 /* SurveyTableViewCell.swift in Sources */,
 				EB612F7C240B471E00CA9CE5 /* PostViewController.swift in Sources */,
+				EB941E3924180F53003BB546 /* CustomEventViewController.swift in Sources */,
 				EB2FFAEA240C8D870064BC6F /* ProfileViewController.swift in Sources */,
 				EBE9BC4B240DAFD10077BC20 /* TakenEventsTableViewCell.swift in Sources */,
 				EB4CD75824076E37000F4931 /* FirstViewController.swift in Sources */,
 				EB4CD75424076E37000F4931 /* AppDelegate.swift in Sources */,
+				EB78576C2422FC5100DC3929 /* MainTabBarViewController.swift in Sources */,
 				EB71FDDF240DEE260071A450 /* RegisterViewController.swift in Sources */,
 				EBE9BC45240DA90B0077BC20 /* TakenEventsViewController.swift in Sources */,
 				EB4CD75624076E37000F4931 /* SceneDelegate.swift in Sources */,
 				EB71FDDC240DED210071A450 /* SurveyViewController.swift in Sources */,
+				EB941E3B24181123003BB546 /* CustomEventViewCell.swift in Sources */,
+				EB941E812418A7B0003BB546 /* SuccessfullyRegistered2ViewController.swift in Sources */,
 				EBE9BC3E240DA7C00077BC20 /* TasksTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -604,7 +678,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -658,7 +732,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -672,14 +746,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8E51A71D8CD482B00DF03DFC /* Pods-GFKApp2.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-3";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QM8L3UW3ZC;
 				INFOPLIST_FILE = GFKApp2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kargakarga.GFKApp2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gfkigsgp.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -690,14 +765,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9B24455C2E9A7E46B5F6A0E9 /* Pods-GFKApp2.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-3";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QM8L3UW3ZC;
 				INFOPLIST_FILE = GFKApp2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kargakarga.GFKApp2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gfkigsgp.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

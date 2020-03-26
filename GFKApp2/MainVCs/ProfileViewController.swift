@@ -11,29 +11,88 @@ import Parse
 
 class ProfileViewController: UIViewController {
     
+    @IBOutlet weak var PPImageView: UIImageView!
     var localPhoto:UIImage!
 
+    @IBAction func LogOutAction(_ sender: Any) {
+        
+        PFUser.logOut()
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                                                     let controller = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+                                                                     controller.modalPresentationStyle = .fullScreen
+                                                                     self.present(controller, animated: true, completion: nil)
+        
+        
+        
+    }
     @IBOutlet weak var ImageViewProfilePhoto: UIImageView!
     @IBOutlet weak var TextFieldFullName: UITextField!
     @IBOutlet weak var TextFieldTitle: UITextField!
     @IBOutlet weak var TextFieldSchool: UITextField!
     
+    //Dismiss keyboard method
+          func keyboardDismiss() {
+              TextFieldFullName.resignFirstResponder()
+              TextFieldTitle.resignFirstResponder()
+              TextFieldSchool.resignFirstResponder()
+          }
+
+          //ADD Gesture Recignizer to Dismiss keyboard then view tapped
+          @IBAction func viewTapped(_ sender: AnyObject) {
+              keyboardDismiss()
+          }
+
+          //Dismiss keyboard using Return Key (Done) Button
+          //Do not forgot to add protocol UITextFieldDelegate
+          func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+              keyboardDismiss()
+
+              return true
+          }
+       
+    
     @IBOutlet weak var LabelPoint: UILabel!
     override func viewDidLoad() {
             super.viewDidLoad()
+        
+        
+        ButtonSave.layer.cornerRadius = 10
+              ButtonSave.clipsToBounds = true
+
+        
             // Do any additional setup after loading the view.
             
             ImageViewProfilePhoto.layer.cornerRadius = 15;
             ImageViewProfilePhoto.image = #imageLiteral(resourceName: "ppdefault")
             
-             
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.imageTapped(gesture:)))
+
+           // add it to the image view;
+           PPImageView.addGestureRecognizer(tapGesture)
+           // make sure imageView can be interacted with by user
+           PPImageView.isUserInteractionEnabled = true
             
             retrieveAndFillProfileIfNotEmpty()
             
         }
+    
+    @objc func imageTapped(gesture: UIGestureRecognizer) {
+          // if the tapped view is a UIImageView then set it to imageview
+          if (gesture.view as? UIImageView) != nil {
+              print("Image Tapped")
+              //Here you can initiate your new ViewController
+            
+             showUserActionMenu(title: "Çıkış Yap",message: "Çıkış yapmak istediğinizden emin misiniz?")
+
+        }}
+
+    override func viewDidAppear(_ animated: Bool) {
         
-        override func viewDidAppear(_ animated: Bool) {
+        removeSpinner()
             retrieveAndFillProfileIfNotEmpty()
+            PPImageView.image = userProfileImageView
+            PPImageView.setRounded()
         }
     
     @IBAction func UpdateProfilePhotoAction(_ sender: Any) {
@@ -52,7 +111,12 @@ class ProfileViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
         
     }
+    @IBOutlet weak var ButtonSave: UIButton!
+    
     @IBAction func SaveProfileAction(_ sender: Any) {
+        
+        self.showSpinner(onView: self.view)
+    
         
         let entered_full_name = TextFieldFullName.text
         let entered_title = TextFieldTitle.text
@@ -69,8 +133,17 @@ class ProfileViewController: UIViewController {
                         user?["school"] = entered_school
                         
                         if(self.localPhoto != nil){
-                            let imageData = self.localPhoto.pngData()
-                            let imageFile = PFFileObject(name:"image.png", data:imageData!)
+                            
+                            
+                            
+                            let imageDataBeforeCompression = self.localPhoto.pngData()
+                            print("size before compression: \(imageDataBeforeCompression!.count) ")
+                        
+    
+                            
+                            let imageData = self.localPhoto.jpeg(.lowest)
+                             print("size after compression: \(imageData!.count) ")
+                            let imageFile = PFFileObject(name:"image2.png", data:imageData!)
                             user?["Photo"] = imageFile
                            
                         
@@ -80,13 +153,13 @@ class ProfileViewController: UIViewController {
                                 // The object has been saved.
                                 print("UserProfileSuccessFullySaved!")
                                 self.showAlert(title: "Başarılı!", message: "Profiliniz başarıyla güncellendi!")
-                                
+                                self.removeSpinner()
                                 
                             } else {
                                 // There was a problem, check error.description
                                 
                                 self.showAlert(title: "Başarısız!", message: "Profiliniz güncellenirken bir hata meydana geldi")
-                                                              
+                                                     self.removeSpinner()
                                 
                             }
                         }
@@ -98,11 +171,29 @@ class ProfileViewController: UIViewController {
         
     }
     
-        func retrieveAndFillProfileIfNotEmpty(){
+    func showUserActionMenu(title:String,message:String){
+         
+          let alert = UIAlertController(title: "" + title, message: "" + message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Çıkış Yap", style: .default, handler: { action in
+                 
+                 PFUser.logOut()
+                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                   let controller = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+                                   controller.modalPresentationStyle = .fullScreen
+                                   self.present(controller, animated: true, completion: nil)
+                 
+                  
+                }))
+                alert.addAction(UIAlertAction(title: "Vazgeç", style: .default, handler: nil))
+                self.present(alert, animated: true)
+         
+     }
+     
+    func retrieveAndFillProfileIfNotEmpty(){
             
-            let userId = PFUser.current()?.objectId
-            var query = PFUser.query()
-            query?.getObjectInBackground(withId: userId!){(user,error) in
+         
+            let query = PFUser.query()
+            query?.getObjectInBackground(withId: PFUser.current()!.objectId!){(user,error) in
     
                 if(error == nil){
     
@@ -228,9 +319,17 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
 extension UIImageView {
 
    func setRounded() {
-    let radius = self.frame.width / 2
-      self.layer.cornerRadius = radius
-      self.layer.masksToBounds = true
+//     let radius = self.frame.width/2
+//      self.layer.cornerRadius = radius
+//      self.layer.masksToBounds = true
+    
+    
+    self.layer.borderWidth = 2
+    self.layer.masksToBounds = true
+    self.layer.borderColor = UIColor.white.cgColor
+    self.layer.cornerRadius = self.frame.height/2
+    self.clipsToBounds = true
+    
    }
         
 }
@@ -255,5 +354,58 @@ extension UIImageView {
         return CGRect(x: x, y: y, width: size.width, height: size.height)
     }
     
+}
+
+var vSpinner : UIView?
+
+extension UIViewController {
+    func showSpinner(onView : UIView) {
+        let spinnerView = UIView.init(frame: onView.bounds)
+        spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+        let ai = UIActivityIndicatorView.init(style: .whiteLarge)
+        ai.startAnimating()
+        ai.center = spinnerView.center
+        
+        DispatchQueue.main.async {
+            spinnerView.addSubview(ai)
+            onView.addSubview(spinnerView)
+        }
+        
+        vSpinner = spinnerView
+    }
     
+    func removeSpinner() {
+        DispatchQueue.main.async {
+            vSpinner?.removeFromSuperview()
+            vSpinner = nil
+        }
+    }
+    
+    func showProfileAction(){
+        
+        
+        print("ProfileAction");
+        
+    }
+    
+    
+   
+}
+
+
+extension UIImage {
+    enum JPEGQuality: CGFloat {
+        case lowest  = 0
+        case low     = 0.25
+        case medium  = 0.5
+        case high    = 0.75
+        case highest = 1
+    }
+
+    /// Returns the data for the specified image in JPEG format.
+    /// If the image object’s underlying image data has been purged, calling this function forces that data to be reloaded into memory.
+    /// - returns: A data object containing the JPEG data, or nil if there was a problem generating the data. This function may return nil if the image has no data or if the underlying CGImageRef contains data in an unsupported bitmap format.
+    func jpeg(_ jpegQuality: JPEGQuality) -> Data? {
+        return jpegData(compressionQuality: jpegQuality.rawValue)
+    }
 }

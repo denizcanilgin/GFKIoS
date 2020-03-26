@@ -10,10 +10,18 @@ import UIKit
 import Parse
 
 class TakenEventsViewController:UIViewController, UITableViewDataSource, UITableViewDelegate {
+    @IBOutlet weak var PPImageView: UIImageView!
     
     var listTakenActivities = [PFObject]()
     var listApprovedActivities = [PFObject]()
     var tableView:UITableView? = nil
+   
+    @IBAction func ButtonAddCustomTaskAction(_ sender: Any) {
+        
+        
+        
+        
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellView = tableView.dequeueReusableCell(withIdentifier: "table_cell_taken_events",for: indexPath) as! TakenEventsTableViewCell
@@ -25,6 +33,9 @@ class TakenEventsViewController:UIViewController, UITableViewDataSource, UITable
         
         cellView.LabelPoint.text = String(point!)
         cellView.LabelTitle.text = title!
+        
+        cellView.LabelPoint.layer.cornerRadius = 10.0
+        cellView.LabelPoint.clipsToBounds = true
         
         cellView.LabelStatus.text = "Kayıt olundu"
         cellView.LabelStatus.textColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
@@ -47,11 +58,37 @@ class TakenEventsViewController:UIViewController, UITableViewDataSource, UITable
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        retrieveTakenEvents()
+        
 
 
         // Do any additional setup after loading the view.
     }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        retrieveTakenEvents()
+        
+        PPImageView.image = userProfileImageView
+        PPImageView.setRounded()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.imageTapped(gesture:)))
+
+                    // add it to the image view;
+                    PPImageView.addGestureRecognizer(tapGesture)
+                    // make sure imageView can be interacted with by user
+                    PPImageView.isUserInteractionEnabled = true
+        
+    }
+    
+    
+    @objc func imageTapped(gesture: UIGestureRecognizer) {
+            // if the tapped view is a UIImageView then set it to imageview
+            if (gesture.view as? UIImageView) != nil {
+                print("Image Tapped")
+                //Here you can initiate your new ViewController
+                 showUserActionMenu(title: "Çıkış Yap",message: "Çıkış yapmak istediğinizden emin misiniz?")
+
+          }}
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         self.tableView = tableView
@@ -101,6 +138,25 @@ class TakenEventsViewController:UIViewController, UITableViewDataSource, UITable
         
     }
     
+    func showUserActionMenu(title:String,message:String){
+         
+          let alert = UIAlertController(title: "" + title, message: "" + message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Çıkış Yap", style: .default, handler: { action in
+                 
+                 PFUser.logOut()
+                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                   let controller = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+                                   controller.modalPresentationStyle = .fullScreen
+                                   self.present(controller, animated: true, completion: nil)
+                 
+                  
+                }))
+                alert.addAction(UIAlertAction(title: "Vazgeç", style: .default, handler: nil))
+                self.present(alert, animated: true)
+         
+     }
+     
+    
 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -133,6 +189,7 @@ class TakenEventsViewController:UIViewController, UITableViewDataSource, UITable
             print("index:" + String(index))
             if(user.objectId == PFUser.current()?.objectId){
              print("indexFound:" + String(index))
+                
                 listTakers!.remove(at: index)
                 actPf["ListTakers"] = listTakers
                 actPf.saveInBackground { (succeeded, error)  in
